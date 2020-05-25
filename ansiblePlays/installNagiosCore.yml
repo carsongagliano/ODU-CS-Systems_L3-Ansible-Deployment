@@ -1,0 +1,135 @@
+#Install and build Nagios Core on a singe Ubuntu server
+
+---
+- hosts: servers
+  become: yes
+  tasks:
+  - include: update_all.yml
+ 
+  - name: Prerequisites Install
+    apt:
+     name: 
+      - autoconf
+      - gcc 
+      - libc6
+      - make
+      - wget
+      - unzip
+      - apache2
+      - php
+      - libapache2-mod-php7.2
+      - libgd-dev
+      - python-pip
+
+  - pip:
+      name:
+        - passlib
+
+  - name: Source Download
+    raw: cd /tmp && wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.6.tar.gz && tar xzf nagioscore.tar.gz
+
+  - name: Configure
+    raw: cd /tmp/nagioscore-nagios-4.4.6/ && ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+
+  - name: Make All
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.6/
+      target: all
+
+  - name: Make group-users
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.6/
+      target: install-groups-users
+    
+  - name: Usermod
+    raw:  usermod -a -G nagios www-data
+
+  - name: Make install
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.6/
+      target: install
+
+  - name: Make install-daemoninit       
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.6/
+      target: install-daemoninit
+
+  - name: Make install       
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.6/
+      target: install-commandmode
+
+  - name: Make install-config 
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.6/
+      target: install-config
+
+  - name: Make install-webconf
+    make:
+      chdir: /tmp/nagioscore-nagios-4.4.6/
+      target: install-webconf
+
+  - apache2_module:
+      state: present
+      name: rewrite
+
+  - apache2_module:
+      state: present
+      name: cgi
+
+  - ufw:
+      rule: allow
+      name: Apache
+
+  - name: Restart Apache2
+    service:
+      name: apache2
+      state: restarted
+
+  - htpasswd:
+      path: /usr/local/nagios/etc/htpasswd.users
+      name: nagiosadmin
+      password: systems
+
+  - name: Start Web UI
+    service:
+     name: nagios
+     state: started
+
+  - include: installNagiosPlugins.yml
+
+  - name: Start Nagios
+    service:
+     name: nagios
+     state: started
+
+  - name: Stop Nagios
+    service:
+     name: nagios
+     state: stopped
+
+  - name: Restart Nagios
+    service:
+     name: nagios
+     state: reloaded
+
+  - name: Create /hosts directory
+    file:
+      path: /usr/local/nagios/etc/hosts
+      state: directory
+
+  - name: chown /host to nagios
+    file:
+      path: /usr/local/nagios/etc/hosts
+      owner: nagios
+      group: nagios
+
+  - name: Copy Nagios Config Template
+    copy:
+      src: /home/carson/ansiblePlays/templates/nagios.cfg
+      dest: /usr/local/nagios/etc/nagios.cfg
+
+  - name: Copy Linux Host Template
+    copy:
+      src: /home/carson/ansiblePlays/templates/linux.cfg
+      dest: /usr/local/nagios/etc/objects/linux.cfg
