@@ -8,7 +8,6 @@ Playbooks
 * installNagiosPlugins.yml
 * addNagiosHosts.yml
 * deployHosts.yml
-* 
 
 *File Structure*
 .
