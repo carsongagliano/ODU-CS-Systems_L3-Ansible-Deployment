@@ -10,6 +10,7 @@ Playbooks
 * deployHosts.yml
 
 *File Structure*
+```
 .
 ├── ansiblePlays
 │   ├── addNagiosHostTMP.yml
@@ -34,3 +35,4 @@ Playbooks
 │   └── update_all.yml
 ├── gitlabKey
 └── gitlabKey.pub
+```
