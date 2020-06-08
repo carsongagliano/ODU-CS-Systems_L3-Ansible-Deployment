@@ -1,0 +1,19 @@
+---
+  - name: Config all hosts
+    hosts: all
+    become: yes
+
+    roles:
+      - common
+
+  - name: Create Nagios Core Server
+    hosts: nagiosServers
+
+    roles:
+      - nagiosServers
+
+  - name: Add Mail Servers to Nagios
+    hosts: mailServers
+
+    roles:
+      - mailServers
