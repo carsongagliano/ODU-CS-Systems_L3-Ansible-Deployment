@@ -1,32 +1,38 @@
-#Install and build Nagios Core on a singe Ubuntu server
+  - name: Update and Upgrade
+    apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400
 
----
-- hosts: servers
-  become: yes
-  tasks:
-  - include: update_all.yml
- 
   - name: Prerequisites Install
     apt:
-     name: 
-      - autoconf
-      - gcc 
-      - libc6
-      - make
-      - wget
-      - unzip
-      - apache2
-      - php
-      - libapache2-mod-php7.2
-      - libgd-dev
-      - python-pip
+      name:
+        - autoconf
+        - gcc 
+        - libc6
+        - make
+        - wget
+        - unzip
+        - apache2
+        - php
+        - libapache2-mod-php7.2
+        - libgd-dev
+        - python-pip
 
   - pip:
       name:
-        - passlib
+       - passlib
 
-  - name: Source Download
-    raw: cd /tmp && wget -O nagioscore.tar.gz https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.6.tar.gz && tar xzf nagioscore.tar.gz
+  - name: Downlaod Nagios Core
+    get_url:
+      url: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.6.tar.gz
+      dest: /tmp/nagioscore-4.4.6.tar.gz
+   
+  - name: Unpack Nagios Core
+    raw: cd /tmp && tar xzf nagioscore-4.4.6.tar.gz
+#    unarchive:
+#      src: /tmp/nagioscore-4.4.6.tar.gz
+#      des: /tmp/nagioscore-4.4.6
 
   - name: Configure
     raw: cd /tmp/nagioscore-nagios-4.4.6/ && ./configure --with-httpd-conf=/etc/apache2/sites-enabled
@@ -96,8 +102,6 @@
      name: nagios
      state: started
 
-  - include: installNagiosPlugins.yml
-
   - name: Start Nagios
     service:
      name: nagios
@@ -117,19 +121,6 @@
     file:
       path: /usr/local/nagios/etc/hosts
       state: directory
-
-  - name: chown /host to nagios
-    file:
-      path: /usr/local/nagios/etc/hosts
-      owner: nagios
-      group: nagios
-
-  - name: Copy Nagios Config Template
-    copy:
-      src: /home/carson/ansiblePlays/templates/nagios.cfg
-      dest: /usr/local/nagios/etc/nagios.cfg
-
-  - name: Copy Linux Host Template
-    copy:
-      src: /home/carson/ansiblePlays/templates/linux.cfg
-      dest: /usr/local/nagios/etc/objects/linux.cfg
+    notify: chown /host to nagios
+    notify: Copy Nagios Config Template
+    notify: Copy Linux Host Template
