@@ -8,7 +8,7 @@ network:
   renderer: networkd
   ethernets:
     ens160:
-      addresses: [ 128.82.6.x/24 ]
+      addresses: [ '{{ ansible_default_ipv4.address }}'/24 ]
       gateway4: 128.82.6.132
       nameservers:
           addresses:

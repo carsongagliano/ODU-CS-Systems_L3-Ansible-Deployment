@@ -1,0 +1,9 @@
+#Define DNS servers
+
+  - name: Copy Netplan Template
+    template:
+      src: 01-netcfg.yaml.j2
+      dest: /etc/netplan/01-netcfg.yaml
+
+#  - name: Apply Netplan
+#    raw: netplan apply 
