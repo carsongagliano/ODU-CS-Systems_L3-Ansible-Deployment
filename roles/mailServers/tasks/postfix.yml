@@ -1,0 +1,20 @@
+#Postfix
+
+  - name: Install Postfix
+    apt:
+      name:
+        - postfix
+
+  - name: Copy main.cf Template
+    template:
+       src: main.cf.j2
+       dest: /etc/postfix/main.cf
+
+  - name: Restart Postfix
+    service:
+     name: postfix
+     state: reloaded
+
+  - ufw:
+       rule: allow
+       name: postfix

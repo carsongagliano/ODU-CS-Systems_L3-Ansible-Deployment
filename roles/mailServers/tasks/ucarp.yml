@@ -1,0 +1,21 @@
+#UCarp
+
+  - name: Ucarp Install
+    apt:
+      name:
+       - ucarp
+
+  - name: Copy vip-up template
+    template:
+      src: vip-up.j2
+      dest: /usr/share/ucarp/vip-up
+
+  - name: Copy vip-down template
+    template:
+      src: vip-down.j2
+      dest: /usr/share/ucarp/vip-down
+
+  - name: Copy ucarp.service template
+    template:
+      src: ucarp.service.j2
+      dest: /usr/share/ucarp/ucarp.service
