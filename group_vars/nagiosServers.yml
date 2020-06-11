@@ -1,0 +1,5 @@
+---
+nagiosHost0: mailServer0
+nagiosHost0IP: 128.82.6.167
+nagiosHost1: mailServer1
+nagiosHost1IP: 128.82.6.168
