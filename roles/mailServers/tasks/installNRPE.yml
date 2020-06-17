@@ -13,11 +13,14 @@
         - wget
         - openssl
 
-   - name: Source Download
-     raw: cd /tmp && wget --no-check-certificate -O nrpe.tar.gz https://github.com/NagiosEnterprises/nrpe/archive/nrpe-3.2.1.tar.gz && tar xzf nrpe.tar.gz
+  - name: Source Download
+    get_url:
+      url: https://github.com/NagiosEnterprises/nrpe/archive/nrpe-3.2.1.tar.gz && tar xzf nrpe.tar.gz
+      dest: /tmp/nrpe.tar.gz
 
    - name: Configure
-     raw: cd /tmp/nrpe-nrpe-3.2.1 && ./configure --enable-command-args --with-ssl-lib=/usr/lib/x86_64-linux-gnu/
+     script:
+       cmd: {{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/configure.sh
 
    - name: Make
      make:
@@ -40,7 +43,8 @@
        target: install-config
 
    - name: Update /etc/services
-     raw: sh -c "echo >> /etc/services" &&  sh -c "sudo echo '# Nagios services' >> /etc/services" && sh -c "sudo echo 'nrpe    5666/tcp' >> /etc/services"
+     script:
+       cmd: {{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/updateServices.sh
 
    - name: Make install-init
      make:
@@ -58,7 +62,8 @@
        state: directory
 
    - name: Edit ufw config
-     raw: sh -c "echo '[NRPE]' > /etc/ufw/applications.d/nagios" && sh -c "echo 'title=Nagios Remote Plugin Executor' >> /etc/ufw/applications.d/nagios" && sh -c "echo 'description=Allows remote execution of Nagios plugins' >> /etc/ufw/applications.d/nagios" && sh -c "echo 'ports=5666/tcp' >> /etc/ufw/applications.d/nagios"
+     script:
+       cmd: {{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/ufwConfig.sh
 
    - ufw:
        rule: allow

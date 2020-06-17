@@ -16,13 +16,13 @@
        - gettext
 
   - name: Source Download
-    raw: cd /tmp && wget --no-check-certificate -O nagios-plugins.tar.gz https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
+    get_url:
+      url: https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
+      dest: /tmp/nagios-plugins.tar.gz
 
-  - name: Unpack Nagios PlugIns
-    raw: cd /tmp && tar zxf nagios-plugins.tar.gz
-
-  - name: Configure
-    raw: cd /tmp/nagios-plugins-release-2.2.1/ && ./tools/setup && ./configure
+  - name: Source Download and Configure
+    script:
+       cmd: {{ baseDirectory }}roles/mailServers/bashScripts/installNagiosPlugins/configure.sh
 
   - name: Make
     make:

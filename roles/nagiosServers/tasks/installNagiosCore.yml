@@ -28,14 +28,9 @@
       url: https://github.com/NagiosEnterprises/nagioscore/archive/nagios-4.4.6.tar.gz
       dest: /tmp/nagioscore-4.4.6.tar.gz
    
-  - name: Unpack Nagios Core
-    raw: cd /tmp && tar xzf nagioscore-4.4.6.tar.gz
-#    unarchive:
-#      src: /tmp/nagioscore-4.4.6.tar.gz
-#      des: /tmp/nagioscore-4.4.6
-
-  - name: Configure
-    raw: cd /tmp/nagioscore-nagios-4.4.6/ && ./configure --with-httpd-conf=/etc/apache2/sites-enabled
+  - name: Configure Nagios Core
+    cript:
+       cmd: {{ baseDirectory }}roles/nagiosServers/bashScripts/installNagiosCore/configure.sh
 
   - name: Make All
     make:
