@@ -4,13 +4,3 @@
       path: /usr/local/nagios/etc/hosts
       owner: nagios
       group: nagios
-
-  - name: Copy Nagios Config Template
-    template:
-      src: nagios.cfg.j2
-      dest: /usr/local/nagios/etc/nagios.cfg
-
-  - name: Copy Linux Host Template
-    template:
-      src: linux.cfg.j2
-      dest: /usr/local/nagios/etc/objects/linux.cfg

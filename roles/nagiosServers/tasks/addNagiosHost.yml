@@ -1,0 +1,9 @@
+  - name: Copy Linux Host Template
+    template:
+      src: mailServers.cfg.j2
+      dest: /usr/local/nagios/etc/hosts/mailServers.cfg
+
+  - name: Restart nagios
+    service:
+       name: nagios
+       state: restarted

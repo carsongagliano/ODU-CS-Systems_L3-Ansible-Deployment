@@ -106,10 +106,19 @@
      name: nagios
      state: reloaded
 
+
+  - name: Copy Nagios Config Template
+    template:
+      src: nagios.cfg.j2
+      dest: /usr/local/nagios/etc/nagios.cfg
+
   - name: Create /hosts directory
     file:
       path: /usr/local/nagios/etc/hosts
       state: directory
     notify: chown /host to nagios
-    notify: Copy Nagios Config Template
-    notify: Copy Linux Host Template
+
+  - name: Copy Linux Host Template
+    template:
+      src: linux.cfg.j2
+      dest: /usr/local/nagios/etc/objects/linux.cfg
