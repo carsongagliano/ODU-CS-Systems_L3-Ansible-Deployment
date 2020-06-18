@@ -22,7 +22,7 @@
 
   - name: Source Download and Configure
     script:
-       cmd: {{ baseDirectory }}roles/nagiosServers/bashScripts/installNagiosPlugins/configure.sh
+       cmd: '{{ baseDirectory }}roles/nagiosServers/bashScripts/installNagiosPlugins/configure.sh'
 
   - name: Make
     make:

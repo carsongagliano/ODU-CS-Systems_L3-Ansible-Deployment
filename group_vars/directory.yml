@@ -1,5 +1,0 @@
----
-#Working directory for this playbook
-# EX. /home/user/ansible/...
-
-baseDirectory: /home/carson/ansible/linux3/

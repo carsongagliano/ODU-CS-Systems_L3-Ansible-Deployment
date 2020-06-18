@@ -13,14 +13,14 @@
         - wget
         - openssl
 
-  - name: Source Download
-    get_url:
-      url: https://github.com/NagiosEnterprises/nrpe/archive/nrpe-3.2.1.tar.gz && tar xzf nrpe.tar.gz
-      dest: /tmp/nrpe.tar.gz
+   - name: Source Download
+     get_url:
+       url: https://github.com/NagiosEnterprises/nrpe/archive/nrpe-3.2.1.tar.gz && tar xzf nrpe.tar.gz
+       dest: /tmp/nrpe.tar.gz
 
    - name: Configure
      script:
-       cmd: {{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/configure.sh
+       cmd: '{{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/configure.sh'
 
    - name: Make
      make:
@@ -44,7 +44,7 @@
 
    - name: Update /etc/services
      script:
-       cmd: {{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/updateServices.sh
+       cmd: '{{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/updateServices.sh'
 
    - name: Make install-init
      make:
@@ -63,7 +63,7 @@
 
    - name: Edit ufw config
      script:
-       cmd: {{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/ufwConfig.sh
+       cmd: '{{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/ufwConfig.sh'
 
    - ufw:
        rule: allow

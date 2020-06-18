@@ -29,8 +29,8 @@
       dest: /tmp/nagioscore-4.4.6.tar.gz
    
   - name: Configure Nagios Core
-    cript:
-       cmd: {{ baseDirectory }}roles/nagiosServers/bashScripts/installNagiosCore/configure.sh
+    script:
+       cmd: '{{ baseDirectory }}roles/nagiosServers/bashScripts/installNagiosCore/configure.sh'
 
   - name: Make All
     make:
