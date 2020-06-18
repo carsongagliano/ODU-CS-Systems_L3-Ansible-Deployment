@@ -9,6 +9,7 @@ emailRelay: relay.cs.odu.edu
 DNS1: 172.18.8.19
 DNS2: 172.18.8.20
 gateway: 128.82.6.132
+nagiosadmin_pass: systems
 
 # Ucarp ---------------------------------------------------
 ucarpPass: systems
