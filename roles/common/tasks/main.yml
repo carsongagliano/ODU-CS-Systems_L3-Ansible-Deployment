@@ -1,3 +1,4 @@
 ---
+  - include: updateUpgrade.yml
   - include: dns.yml
   - include: motd.yml

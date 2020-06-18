@@ -1,4 +1,3 @@
-#MOTD
   - name: Copy MOTD Template
     copy:
        src: motd.j2

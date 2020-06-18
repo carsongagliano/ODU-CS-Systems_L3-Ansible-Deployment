@@ -34,12 +34,12 @@ smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 # information on enabling SSL in the smtp client.
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
-myhostname = {{ ansible_hostname }}.cj.undernet.cs.odu.edu
+myhostname = {{ ansible_hostname }}{{ FQDN-Domain }}
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 myorigin = /etc/mailname
-mydestination = $myhostname, {{ ansible_hostname }}.cj.undernet.cs.odu.edu, localhost.cj.undernet.cs.odu.edu, , localhost
-relayhost = relay.cs.odu.edu
+mydestination = $myhostname, {{ ansible_hostname }}{{ FQDN-Domain }}, localhost{{ FQDN-Domain }}, , localhost
+relayhost = {{ emailRelay }}
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
 mailbox_size_limit = 0
 recipient_delimiter = +

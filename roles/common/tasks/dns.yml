@@ -1,5 +1,3 @@
-#Define DNS servers
-
   - name: Copy Netplan Template
     template:
       src: 01-netcfg.yaml.j2

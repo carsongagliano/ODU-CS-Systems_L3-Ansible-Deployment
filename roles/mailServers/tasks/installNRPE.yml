@@ -1,5 +1,3 @@
-#Install and configure NRPE for Nagios monitoring
-
    - name: Install Prerequisites
      apt:
        name:
@@ -15,7 +13,7 @@
 
    - name: Source Download
      get_url:
-       url: https://github.com/NagiosEnterprises/nrpe/archive/nrpe-3.2.1.tar.gz && tar xzf nrpe.tar.gz
+       url: https://github.com/NagiosEnterprises/nrpe/archive/nrpe-3.2.1.tar.gz
        dest: /tmp/nrpe.tar.gz
 
    - name: Configure

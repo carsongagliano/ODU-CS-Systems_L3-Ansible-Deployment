@@ -20,7 +20,7 @@
       url: https://github.com/nagios-plugins/nagios-plugins/archive/release-2.2.1.tar.gz
       dest: /tmp/nagios-plugins.tar.gz
 
-  - name: Source Download and Configure
+  - name: Configure
     script:
        cmd: '{{ baseDirectory }}roles/nagiosServers/bashScripts/installNagiosPlugins/configure.sh'
 

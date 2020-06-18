@@ -1,5 +1,22 @@
 ---
-#Working directory for this playbook
+#Working directory for this playbook ----------------------
 # EX. /home/user/ansible/ ...
-
 baseDirectory: /home/carson/carson_linux3_ansible/
+
+# Infrastructure ------------------------------------------
+FQDN-Domain: .cj.undernet.cs.odu.edu
+emailRelay: relay.cs.odu.edu
+DNS1: 172.18.8.19
+DNS2: 172.18.8.20
+gateway: 128.82.6.132
+
+# Ucarp ---------------------------------------------------
+ucarpPass: systems
+ucarpIP: 128.82.6.172
+
+# Host Variables ------------------------------------------
+nagiosServerIP: 128.82.6.169
+nagiosHost0: mailServer0
+nagiosHost0IP: 128.82.6.167
+nagiosHost1: mailServer1
+nagiosHost1IP: 128.82.6.168

@@ -8,7 +8,7 @@
       src: mailServers1.cfg.j2
       dest: /usr/local/nagios/etc/hosts/{{ nagiosHost1 }}.cfg
 
-  - name: "Restart nagios"
+  - name: Restart nagios
     service:
        name: nagios
        state: restarted
