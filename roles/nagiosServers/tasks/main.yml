@@ -1,4 +1,3 @@
 ---
   - include: installNagiosCore.yml
   - include: installNagiosPlugins.yml
-  - include: addNagiosHost.yml
