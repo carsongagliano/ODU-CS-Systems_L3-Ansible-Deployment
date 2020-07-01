@@ -22,7 +22,7 @@
 
   - name: Configure
     script:
-       cmd: '{{ baseDirectory }}roles/mailServers/bashScripts/installNagiosPlugins/configure.sh'
+       cmd: '{{ role_path }}/bashScripts/installNagiosPlugins/configure.sh'
 
   - name: Make
     make:

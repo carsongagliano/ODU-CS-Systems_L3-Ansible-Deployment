@@ -18,7 +18,7 @@
 
    - name: Configure
      script:
-       cmd: '{{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/configure.sh'
+       cmd: '{{ role_path }}/bashScripts/installNRPE/configure.sh'
 
    - name: Make
      make:
@@ -42,7 +42,7 @@
 
    - name: Update /etc/services
      script:
-       cmd: '{{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/updateServices.sh'
+       cmd: '{{ role_path }}/bashScripts/installNRPE/updateServices.sh'
 
    - name: Make install-init
      make:
@@ -61,7 +61,7 @@
 
    - name: Edit ufw config
      script:
-       cmd: '{{ baseDirectory }}roles/mailServers/bashScripts/installNRPE/ufwConfig.sh'
+       cmd: '{{ role_path }}/bashScripts/installNRPE/ufwConfig.sh'
 
    - ufw:
        rule: allow

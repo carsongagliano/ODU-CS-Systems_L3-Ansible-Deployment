@@ -24,7 +24,7 @@
    
   - name: Configure
     script:
-       cmd: '{{ baseDirectory }}roles/nagiosServers/bashScripts/installNagiosCore/configure.sh'
+       cmd: '{{ role_path }}/bashScripts/installNagiosCore/configure.sh'
 
   - name: Make All
     make:

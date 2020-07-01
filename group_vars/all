@@ -1,8 +1,4 @@
 ---
-#Working directory for this playbook ----------------------
-# EX. /home/user/ansible/ ...
-baseDirectory: /home/carson/carson_linux3_ansible/
-
 # Infrastructure ------------------------------------------
 FQDN-Domain: .cj.undernet.cs.odu.edu
 emailRelay: relay.cs.odu.edu
