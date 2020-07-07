@@ -1,20 +1,20 @@
 ---
 # Infrastructure ------------------------------------------
-FQDN-Domain: .cj.undernet.cs.odu.edu
-emailRelay: relay.cs.odu.edu
-DNS1: 172.18.8.19
-DNS2: 172.18.8.20
-gateway: 128.82.6.132
-nagiosadmin_pass: systems
-nagiosServerIP: 128.82.6.169
+FQDN-Domain: .local
+emailRelay: relay.local
+DNS1: xxx.xxx.xxx.xxx
+DNS2: xxx.xxx.xxx.xxx
+gateway: xxx.xxx.xxx.xxx
+nagiosadmin_pass: changeme
+nagiosServerIP: xxx.xxx.xxx.xxx
 
 # Ucarp ---------------------------------------------------
-ucarpPass: systems
-ucarpIP: 128.82.6.172
+ucarpPass: changeme
+ucarpIP: xxx.xxx.xxx.xxx
 
 # Host Variables --- Adjust Template as Needed ------------
-nagiosServerIP: 128.82.6.169
+nagiosServerIP: xxx.xxx.xxx.xxx
 nagiosHost0: mailServer0
-nagiosHost0IP: 128.82.6.167
+nagiosHost0IP: xxx.xxx.xxx.xxx
 nagiosHost1: mailServer1
-nagiosHost1IP: 128.82.6.168
+nagiosHost1IP: xxx.xxx.xxx.xxx
