@@ -12,7 +12,7 @@ nagiosServerIP: xxx.xxx.xxx.xxx
 ucarpPass: changeme
 ucarpIP: xxx.xxx.xxx.xxx
 
-# Host Variables --- Adjust Template as Needed ------------
+# Host Variables ------------------------------------------
 nagiosServerIP: xxx.xxx.xxx.xxx
 nagiosHost0: mailServer0
 nagiosHost0IP: xxx.xxx.xxx.xxx
